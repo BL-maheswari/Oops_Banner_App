@@ -1,5 +1,7 @@
 package com.bridgelabz.oops.oopbannerapp;
 
+import java.util.HashMap;
+
 public class OopsBannerApp {
 	public static void main(String[] args) {
 		System.out.println("oops");
@@ -70,6 +72,10 @@ public class OopsBannerApp {
 		CharacterPatternMap[] charMaps = createCharacterPatternMaps();
 
 		printMessage("OOPS", charMaps);
+		System.out.println("========================================");
+		HashMap<Character, String[]> charMap = createCharacterMap();
+		String message = "OOPS";
+		displayBanner(message, charMap);
 	}
 
 	public static String[] getOPattern() {
@@ -131,6 +137,30 @@ public class OopsBannerApp {
 			for (int j = 0; j < message.length(); j++) {
 				String[] pattern = getCharacterPattern(message.charAt(j), charMaps);
 				System.out.print(pattern[i] + "  ");
+			}
+			System.out.println();
+		}
+	}
+
+	public static HashMap<Character, String[]> createCharacterMap() {
+		HashMap<Character, String[]> charMap = new HashMap<>();
+		charMap.put('O', new String[] { "   ***    ", " **   **  ", "**     ** ", "**     ** ", "**     ** ",
+				"**     ** ", "**     ** ", " **   **  ", "   ***    " });
+		charMap.put('P', new String[] { "******    ", "**    **  ", "**     ** ", "**    **  ", "******    ",
+				"**        ", "**        ", "**        ", "**        " });
+		charMap.put('S', new String[] { "    ***** ", "  **      ", "**        ", "  **      ", "    ***   ",
+				"      **  ", "        ** ", "      **   ", " *****     " });
+		return charMap;
+	}
+
+	public static void displayBanner(String message, HashMap<Character, String[]> charMap) {
+		int patternHeight = charMap.get('O').length;
+		char[] chars = message.toCharArray();
+
+		for (int line = 0; line < patternHeight; line++) {
+			for (char ch : chars) {
+				String[] pattern = charMap.get(ch);
+				System.out.print(pattern[line]);
 			}
 			System.out.println();
 		}
